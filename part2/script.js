@@ -24,6 +24,13 @@ function showQuestion() {
    //INPUT YOUR CODE HERE
    //HINT: Loop through each option for the current question
   q.options.forEach((option, index) => {
+    let button = document.createElement("button");
+    button.textContent = option;
+    button.classList.add("option");
+    button.addEventListener("click", () => {
+      checkAnswer(index);
+    });
+    optionsContainer.appendChild(button);
   // TODO:
   // 1. Create a button element
   // 2. Set the button's text to the option
@@ -47,6 +54,8 @@ function checkAnswer(selectedIndex) {
 }
 
 function clearOptions() {
+  optionsCoontainer.innerHTML = "";
+  nextBtn.disabled = true;
   // INPUT YOUR CODE HERE
   // HINT
   // 1. Clear the contents of the options container
@@ -54,6 +63,12 @@ function clearOptions() {
 }
 
 nextBtn.addEventListener("click", () => {
+  currentQuestionIndex++;
+  if (currentQuestionIndex < question.length) {
+    showQuestion();
+  } else {
+    showResult();
+  }
   // INPUT YOUR CODE HERE
   // HINT
   // 1. Move to the next question by increasing the question index
