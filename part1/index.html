@@ -40,7 +40,7 @@
 <body>
 
   <h1>Quote generator homework</h1>
-  <h2>Create by Gift sensei </h2> <!-- Change XXXX to your name and student ID-->
+  <h2>Create by Gift sensei</h2> <!-- Change XXXX to your name and student ID-->
 
   <div id="quoteBox">
     <p id="quote">Click the button to get a quote!</p>
@@ -69,6 +69,7 @@
         quoteText.textContent = "Failed to load quotes.";
         console.error("Error loading quotes:", error);
       }
+    }
 
     function getQuote() {
       if (quotes.length === 0) return;
@@ -78,10 +79,9 @@
     }
 
     newQuoteBtn.addEventListener("click", getQuote);
-    getQuote(); // Load a quote on page load
+    loadQuotes(); // ← Now it loads quotes on page load
   </script>
 
 </body>
 
 </html>
-
