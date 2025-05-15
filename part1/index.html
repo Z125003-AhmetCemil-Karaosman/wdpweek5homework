@@ -58,13 +58,25 @@
     const authorText = document.getElementById("author");
     const newQuoteBtn = document.getElementById("newQuoteBtn");
 
+    let quotes = [];
+
+    async function loadQuotes() {
+      try {
+        const response = await fetch("quotes.json");
+        quotes = await response.json();
+        getQuote(); // Display a quote after loading
+      } catch (error) {
+        quoteText.textContent = "Failed to load quotes.";
+        console.error("Error loading quotes:", error);
+      }
+
     function getQuote() {
-     
-      //INPUT YOUR CODE HERE
-      //HINT: Use fetch() to get quote from "quotes.json"
-
-
+      if (quotes.length === 0) return;
+      const random = quotes[Math.floor(Math.random() * quotes.length)];
+      quoteText.textContent = `"${random.q}"`;
+      authorText.textContent = `— ${random.a}`;
     }
+
     newQuoteBtn.addEventListener("click", getQuote);
     getQuote(); // Load a quote on page load
   </script>
@@ -72,3 +84,4 @@
 </body>
 
 </html>
+
