@@ -21,22 +21,20 @@ function showQuestion() {
   const q = questions[currentQuestionIndex];
   questionText.textContent = q.question;
 
-   //INPUT YOUR CODE HERE
-   //HINT: Loop through each option for the current question
-  q.options.forEach((option, index) => {
-    let button = document.createElement("button");
-    button.textContent = option;
-    button.classList.add("option");
-    button.addEventListener("click", () => {
-      checkAnswer(index);
-    });
-    optionsContainer.appendChild(button);
   // TODO:
   // 1. Create a button element
   // 2. Set the button's text to the option
   // 3. Add a class to style it
   // 4. Add an onclick event that calls checkAnswer(index)
   // 5. Add the button to the optionsContainer
+
+  q.options.forEach((option, index) => {
+    const button = document.createElement("button");
+    button.textContent = option;
+    button.className = "option-btn";
+    button.onclick = () => checkAnswer(index);
+    optionsContainer.appendChild(button);
+ 
 });
 }
 
@@ -54,28 +52,18 @@ function checkAnswer(selectedIndex) {
 }
 
 function clearOptions() {
-  optionsCoontainer.innerHTML = "";
+   optionsContainer.innerHTML = "";
   nextBtn.disabled = true;
-  // INPUT YOUR CODE HERE
-  // HINT
-  // 1. Clear the contents of the options container
-  // 2. Disable the Next button so users can't skip ahead
 }
 
 nextBtn.addEventListener("click", () => {
   currentQuestionIndex++;
-  if (currentQuestionIndex < question.length) {
+  if (currentQuestionIndex < questions.length) {
     showQuestion();
   } else {
     showResult();
   }
-  // INPUT YOUR CODE HERE
-  // HINT
-  // 1. Move to the next question by increasing the question index
-  // 2. If there are questions left, show the next one
-  // 3. Otherwise, call a function to show the final result
 });
-
 
 function showResult() {
   document.querySelector(".quiz-box").innerHTML = `<h2>Your score: ${score} / ${questions.length}</h2>`;
